@@ -26,55 +26,67 @@ def slice_pizza(i,j,pizza,n_slices,pizza_dim):
                 for m in range(leftbound+1,j+1):
                     for r in range(i,lowerbound+1):
                         c=rightbound
-                        below_maxsize,size=check_size([upperbound,leftbound],[lowerbound,rightbound],pizza_dim[3])
-                        if below_maxsize: #skip check if the slice is bigger than H
+                        below_maxsize,size=check_size([n,m],[r,c],pizza_dim[3])
+                        #skip check if the slice is bigger than H
+                        if below_maxsize: 
                             if possible_slice.size==0:
-                                if check_pizza([n,m],[r,c],pizza,pizza_dim[2]): # check for enough no of T & M
-                                    if ~np.any(pizza[n:r,m:c]=='-'): #check shape
+                                # check for enough no of T & M
+                                if check_pizza([n,m],[r,c],pizza,pizza_dim[2]): 
+                                    #check shape
+                                    if ~np.any(pizza[n:r+1,m:c+1]=='-'): 
                                           possible_slice=np.array([[n,m,r,c,size]])
                             elif size<min(possible_slice[:,4]):
-                                if check_pizza([n,m],[r,c],pizza,pizza_dim[2]): # check for enough no of T & M
-                                    if ~np.any(pizza[n:r,m:c]=='-'): #check shape
+                                if check_pizza([n,m],[r,c],pizza,pizza_dim[2]): 
+                                    if ~np.any(pizza[n:r+1,m:c+1]=='-'):
                                         possible_slice=np.append(possible_slice,[[n,m,r,c,size]],0)
                     for c in range(j,rightbound):
                         r=lowerbound
-                        below_maxsize,size=check_size([upperbound,leftbound],[lowerbound,rightbound],pizza_dim[3])
-                        if below_maxsize: #skip check if the slice is bigger than H
+                        below_maxsize,size=check_size([n,m],[r,c],pizza_dim[3])
+                        #skip check if the slice is bigger than H
+                        if below_maxsize: 
                             if possible_slice.size==0:
-                                if check_pizza([n,m],[r,c],pizza,pizza_dim[2]): # check for enough no of T & M
-                                    if ~np.any(pizza[n:r,m:c]=='-'): #check shape
+                                # check for enough no of T & M
+                                if check_pizza([n,m],[r,c],pizza,pizza_dim[2]): 
+                                    #check shape
+                                    if ~np.any(pizza[n:r+1,m:c+1]=='-'): 
                                           possible_slice=np.array([[n,m,r,c,size]])
                             elif size<min(possible_slice[:,4]):
-                                if check_pizza([n,m],[r,c],pizza,pizza_dim[2]): # check for enough no of T & M
-                                    if ~np.any(pizza[n:r,m:c]=='-'): #check shape
+                                if check_pizza([n,m],[r,c],pizza,pizza_dim[2]): 
+                                    if ~np.any(pizza[n:r+1,m:c+1]=='-'):
                                         possible_slice=np.append(possible_slice,[[n,m,r,c,size]],0)
             for n in range(upperbound,i+1):
                 m=leftbound
                 for r in range(i,lowerbound+1):
                     for c in range(j,rightbound+1):
-                        below_maxsize,size=check_size([upperbound,leftbound],[lowerbound,rightbound],pizza_dim[3])
-                        if below_maxsize: #skip check if the slice is bigger than H
+                        below_maxsize,size=check_size([n,m],[r,c],pizza_dim[3])
+                        #skip check if the slice is bigger than H
+                        if below_maxsize: 
                             if possible_slice.size==0:
-                                if check_pizza([n,m],[r,c],pizza,pizza_dim[2]): # check for enough no of T & M
-                                    if ~np.any(pizza[n:r,m:c]=='-'): #check shape
+                                # check for enough no of T & M
+                                if check_pizza([n,m],[r,c],pizza,pizza_dim[2]): 
+                                    #check shape
+                                    if ~np.any(pizza[n:r+1,m:c+1]=='-'): 
                                           possible_slice=np.array([[n,m,r,c,size]])
                             elif size<min(possible_slice[:,4]):
-                                if check_pizza([n,m],[r,c],pizza,pizza_dim[2]): # check for enough no of T & M
-                                    if ~np.any(pizza[n:r,m:c]=='-'): #check shape
+                                if check_pizza([n,m],[r,c],pizza,pizza_dim[2]): 
+                                    if ~np.any(pizza[n:r+1,m:c+1]=='-'):
                                         possible_slice=np.append(possible_slice,[[n,m,r,c,size]],0)
             for m in range(leftbound+1,j+1):
                 n=upperbound
                 for r in range(i,lowerbound+1):
                     for c in range(j,rightbound+1):
-                        below_maxsize,size=check_size([upperbound,leftbound],[lowerbound,rightbound],pizza_dim[3])
-                        if below_maxsize: #skip check if the slice is bigger than H
+                        below_maxsize,size=check_size([n,m],[r,c],pizza_dim[3])
+                        #skip check if the slice is bigger than H
+                        if below_maxsize: 
                             if possible_slice.size==0:
-                                if check_pizza([n,m],[r,c],pizza,pizza_dim[2]): # check for enough no of T & M
-                                    if ~np.any(pizza[n:r,m:c]=='-'): #check shape
+                                # check for enough no of T & M
+                                if check_pizza([n,m],[r,c],pizza,pizza_dim[2]): 
+                                    #check shape
+                                    if ~np.any(pizza[n:r+1,m:c+1]=='-'): 
                                           possible_slice=np.array([[n,m,r,c,size]])
                             elif size<min(possible_slice[:,4]):
-                                if check_pizza([n,m],[r,c],pizza,pizza_dim[2]): # check for enough no of T & M
-                                    if ~np.any(pizza[n:r,m:c]=='-'): #check shape
+                                if check_pizza([n,m],[r,c],pizza,pizza_dim[2]): 
+                                    if ~np.any(pizza[n:r+1,m:c+1]=='-'):
                                         possible_slice=np.append(possible_slice,[[n,m,r,c,size]],0)
             if possible_slice.size!=0:
                 possible_slice= possible_slice[possible_slice[:,4].argsort()][0]#take smallest slice
@@ -87,14 +99,15 @@ def slice_pizza(i,j,pizza,n_slices,pizza_dim):
                 n_slices+=1
     if not sliced:
         #print(pizza[upperbound:lowerbound,leftbound:rightbound])
+        size=0
         print(i,j,'not sliced')
     else:
-        #print('expand:',expand)
+        size=possible_slice[4]
         print(i,j,'sliced',possible_slice)
-    return pizza,n_slices, possible_slice[0:4]
+    return pizza,n_slices, possible_slice[0:4],size
 
 def check_size(topleft,bottomright,H):
-    size=(bottomright[0]-topleft[0])*(bottomright[1]-topleft[1])
+    size=(bottomright[0]-topleft[0]+1)*(bottomright[1]-topleft[1]+1)
     if size>H:
         return False, size
     else:
@@ -144,16 +157,17 @@ if n_T > n_M:
 else:
     ing_sel = 'T'
     max_slices=math.floor(n_T/pizza_dim[2])
-n_slices=0;pizza_slices = []
+n_slices=0;pizza_slices = [];coverage=0
 for i in range(pizza_dim[0]):
     for j in range(pizza_dim[1]):
         if pizza[i][j] == ing_sel:
-            pizza,n_slices,pizza_slice = slice_pizza(i,j,pizza,n_slices,pizza_dim)
+            pizza,n_slices,pizza_slice,size = slice_pizza(i,j,pizza,n_slices,pizza_dim)
             pizza_slices.append(pizza_slice)
+            coverage+=size
 
 print('max no of slices:',max_slices)
 print('no of slices:',n_slices)
-
+print('coverage:',coverage,'/',pizza_dim[0]*pizza_dim[1])
 
 f = open('pizza_sol.txt','w')
 f.write(str(n_slices)+'\n')
