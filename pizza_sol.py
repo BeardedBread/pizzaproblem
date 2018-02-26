@@ -122,10 +122,11 @@ for line in f:
 f.close()
 #print(info)
 
-pizza_dim = map(int,info[0].split(' '))
+pizza_dim = info[0].split(' ')
+pizza_dim = [int(p) for p in pizza_dim]
 print(pizza_dim)
 n_T = 0;n_M =0;
-pizza = np.zeros([int(pizza_dim[0]),int(pizza_dim[1])],dtype = str)
+pizza = np.zeros([pizza_dim[0],pizza_dim[1]],dtype = str)
 for i in range(int(pizza_dim[0])):
     for j in range(int(pizza_dim[1])):
         pizza[i][j] = info[i+1][j]
