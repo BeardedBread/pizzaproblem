@@ -63,7 +63,7 @@ def slice_pizza(i,j,pizza,n_slices,pizza_dim):
                                     if ~np.any(pizza[n:r,m:c]=='-'): #check shape
                                         possible_slice=np.append(possible_slice,[[n,m,r,c,size]],0)
             for m in range(leftbound+1,j+1):
-                m=upperbound
+                n=upperbound
                 for r in range(i,lowerbound+1):
                     for c in range(j,rightbound+1):
                         below_maxsize,size=check_size([upperbound,leftbound],[lowerbound,rightbound],pizza_dim[3])
@@ -90,8 +90,8 @@ def slice_pizza(i,j,pizza,n_slices,pizza_dim):
         print(i,j,'not sliced')
     else:
         #print('expand:',expand)
-        print(i,j,'sliced',possible_slice[4])
-    return pizza,n_slices
+        print(i,j,'sliced',possible_slice)
+    return pizza,n_slices, possible_slice[0:4]
 
 def check_size(topleft,bottomright,H):
     size=(bottomright[0]-topleft[0])*(bottomright[1]-topleft[1])
@@ -144,19 +144,18 @@ if n_T > n_M:
 else:
     ing_sel = 'T'
     max_slices=math.floor(n_T/pizza_dim[2])
-#f = open('pizza_sol,txt','w')
-n_slices=0
+n_slices=0;pizza_slices = []
 for i in range(pizza_dim[0]):
     for j in range(pizza_dim[1]):
         if pizza[i][j] == ing_sel:
-            pizza,n_slices = slice_pizza(i,j,pizza,n_slices,pizza_dim)
+            pizza,n_slices,pizza_slice = slice_pizza(i,j,pizza,n_slices,pizza_dim)
+            pizza_slices.append(pizza_slice)
+
 print('max no of slices:',max_slices)
 print('no of slices:',n_slices)
 
 
-
-
-
-
-
-#f.close()
+f = open('pizza_sol.txt','w')
+f.write(str(n_slices)+'\n')
+[f.write(str(ps).strip('[]')+'\n') for ps in pizza_slices if ps.size]
+f.close()
